@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import type { CardProps } from "./types";
+import {useTodoListContext} from './TodoListContext'
 
-export function TodoAddForm({ setCards }: any) {
+export function TodoAddForm() {
+  const {setCards} = useTodoListContext()
   const [priority, setPriority] = useState(5);
   const [text, setText] = useState("");
   function preventBadData() {

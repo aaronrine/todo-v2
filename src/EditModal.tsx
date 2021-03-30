@@ -1,12 +1,14 @@
 import { useState } from "react";
 import Modal from "react-modal";
+import { useTodoListContext } from "./TodoListContext";
 
-export function EditModal({
-  modalIsOpen,
-  setIsOpen,
-  getCurrentCardById,
-  setCards,
-}: any) {
+export function EditModal() {
+  const {
+    modalIsOpen,
+    setIsOpen,
+    getCurrentCardById,
+    setCards,
+  } = useTodoListContext();
   const currentCard = getCurrentCardById();
   const [priority, setPriority] = useState(5);
   const [editText, setEditText] = useState("");
