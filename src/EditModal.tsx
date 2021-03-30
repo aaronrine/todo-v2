@@ -1,67 +1,16 @@
-import { useState } from "react";
 import Modal from "react-modal";
 import { useTodoListContext } from "./TodoListContext";
+import { TodoForm } from "./TodoForm";
 
 export function EditModal() {
-  const {
-    modalIsOpen,
-    setIsOpen,
-    getCurrentCardById,
-    setCards,
-  } = useTodoListContext();
-  const currentCard = getCurrentCardById();
-  const [priority, setPriority] = useState(5);
-  const [editText, setEditText] = useState("");
-  function preventBadData() {
-    if (!isNaN(priority) && editText !== "") {
-      currentCard.text = editText;
-      currentCard.priority = priority;
-      setCards((prev: any) => {
-        const idx = prev.indexOf(getCurrentCardById());
-        prev[idx] = currentCard;
-        return prev;
-      });
-      setIsOpen(false);
-    }
-  }
+  const { modalIsOpen } = useTodoListContext();
+
   return (
     <Modal
       isOpen={modalIsOpen}
       appElement={document.getElementById("root") as HTMLDivElement}
     >
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          preventBadData();
-        }}
-      >
-        <label htmlFor="editDescriptionInput" id="editDescriptionLabel">
-          Edit Todo Description
-        </label>
-        <input
-          aria-labelledby="editDescriptionLabel"
-          type="text"
-          id="editDescriptionInput"
-          value={editText}
-          onChange={(e) => {
-            setEditText(e.target.value);
-          }}
-          required
-        />
-        <label htmlFor="editPriorityInput">Edit Priority Level</label>
-        <input
-          type="number"
-          id="editPriorityInput"
-          value={priority || ""}
-          min="1"
-          max="5"
-          onChange={(e) => {
-            setPriority(Math.min(Math.max(parseInt(e.target.value), 1), 5));
-          }}
-          required
-        />
-        <button type="submit">Close</button>
-      </form>
+      <TodoForm />
     </Modal>
   );
 }

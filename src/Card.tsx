@@ -13,7 +13,7 @@ export function Card({
   moveCard,
   setCards,
   setIsOpen,
-  setCurrentCard,
+  setCurrentCardId,
 }: CardProps) {
   const CARD = "card";
   const style = {
@@ -87,7 +87,7 @@ export function Card({
         setCards={setCards}
         id={id}
         setIsOpen={setIsOpen}
-        setCurrentCard={setCurrentCard}
+        setCurrentCardId={setCurrentCardId}
       />
     </div>
   );

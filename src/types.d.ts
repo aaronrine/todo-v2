@@ -6,7 +6,7 @@ export interface CardProps {
   moveCard: (dragIndex: number, hoverIndex: number) => void
   setCards: any
   setIsOpen: any
-  setCurrentCard: any
+  setCurrentCardId: any
 }
 
 export interface DragItem {

@@ -2,7 +2,7 @@ export function TodoControlPanel({
   setCards,
   id,
   setIsOpen,
-  setCurrentCard,
+  setCurrentCardId,
 }: any) {
   return (
     <div>
@@ -16,7 +16,7 @@ export function TodoControlPanel({
       <button
         onClick={() => {
           setIsOpen(true);
-          setCurrentCard(id);
+          setCurrentCardId(id);
         }}
       >
         Edit

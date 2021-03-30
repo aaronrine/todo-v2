@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useContext } from "react";
+import React, { useState, useCallback, useContext, useEffect } from "react";
 import { useLocalStorage } from "./hooks";
 import update from "immutability-helper";
 import { Card } from "./Card";
@@ -6,8 +6,8 @@ import { Card } from "./Card";
 interface ContextState {
   cards: any;
   setCards: any;
-  getCurrentCardById: any;
-  setCurrentCard: any;
+  getCurrentCard: any;
+  setCurrentCardId: any;
   moveCard: any;
   renderCard: any;
   setIsOpen: any;
@@ -18,9 +18,16 @@ const TodoListContext = React.createContext({} as ContextState);
 
 export function TodoListContextProvider({ children }: any) {
   const [cards, setCards] = useLocalStorage("cards", []);
-  const [currentCardId, setCurrentCard] = useState("");
+  const [currentCardId, setCurrentCardId] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
-  function getCurrentCardById() {
+
+  useEffect(()=>{
+    if(modalIsOpen===false){
+      setCurrentCardId('')
+    }
+  }, [modalIsOpen])
+
+  function getCurrentCard() {
     return cards.find((card: any) => card.id === currentCardId);
   }
   const moveCard = useCallback(
@@ -51,7 +58,7 @@ export function TodoListContextProvider({ children }: any) {
         moveCard={moveCard}
         setCards={setCards}
         setIsOpen={setIsOpen}
-        setCurrentCard={setCurrentCard}
+        setCurrentCardId={setCurrentCardId}
       />
     );
   };
@@ -60,8 +67,8 @@ export function TodoListContextProvider({ children }: any) {
       value={{
         cards,
         setCards,
-        getCurrentCardById,
-        setCurrentCard,
+        getCurrentCard,
+        setCurrentCardId,
         moveCard,
         renderCard,
         setIsOpen,
