@@ -1,0 +1,63 @@
+.TodoControlPanel {
+  display: flex;
+  justify-content: space-between;
+  button {
+    border: none;
+    border-radius: 0.5em;
+    background: black;
+    padding: 0.25em 0.5em;
+    color: white;
+    font-size: 0.85em;
+  }
+  button:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgb(83, 189, 224)
+  }
+  button + button {
+    margin-left: 0.5em;
+  }
+  .deleteBtn {
+    background: red;
+  }
+  .checkboxContainer {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    .markBtn {
+      position: absolute;
+      opacity: 0;
+      cursor: pointer;
+      height: 0;
+      width: 0;
+    }
+    .checkmark {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 1.5em;
+      width: 1.5em;
+      border-radius: 0.5em;
+      background: black;
+    }
+    .markBtn:focus + .checkmark {
+      box-shadow: 0 0 0 3px rgb(83, 189, 224);
+    }
+    .checkmark:after {
+      content: "";
+      position: absolute;
+      display: none;
+    }
+  }
+  .checkboxContainer.marked .checkmark:after {
+    display: block;
+  }
+  .checkboxContainer .checkmark:after {
+    left: 0.5em;
+    top: 0.25em;
+    width: 0.3125em;
+    height: 0.625em;
+    border: solid rgb(83, 189, 224);
+    border-width: 0 0.25em 0.25em 0;
+    transform: rotate(45deg);
+  }
+}

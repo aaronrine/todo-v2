@@ -1,20 +1,24 @@
+import "./TodoControlPanel.scss";
 export function TodoControlPanel({
   setCards,
   id,
   setIsOpen,
   setCurrentCardId,
-  setMarked
+  setMarked,
+  marked
 }: any) {
   return (
-    <div>
+    <div className="TodoControlPanel">
       <button
+        className="deleteBtn"
         onClick={() => {
           setCards((prev: any) => prev.filter((todo: any) => todo.id !== id));
         }}
       >
-        -
+        Delete
       </button>
       <button
+        className="editBtn"
         onClick={() => {
           setIsOpen(true);
           setCurrentCardId(id);
@@ -22,9 +26,15 @@ export function TodoControlPanel({
       >
         Edit
       </button>
-      <input className="markBtn" type="checkbox" onChange={()=>{
-        setMarked((prev:any) => !prev)
-      }}/>
+      <div
+        className={`checkboxContainer ${marked? 'marked' : ''}`}
+        onClick={() => {
+          setMarked((prev: any) => !prev);
+        }}
+      >
+        <input className="markBtn" type="checkbox" />
+        <span className="checkmark"></span>
+      </div>
     </div>
   );
 }
