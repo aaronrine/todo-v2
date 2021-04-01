@@ -2,6 +2,7 @@ import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useTodoListContext } from "./TodoListContext";
 import type { CardProps } from "./types";
+import './TodoForm.scss'
 
 export function TodoForm() {
   const { setCards, getCurrentCard, setIsOpen } = useTodoListContext();
@@ -49,33 +50,35 @@ export function TodoForm() {
         id={`${mode}DescriptionInputLabel`}
       >
         {mode === "edit" ? "Edit " : ""}Todo Description
+        <input
+          aria-labelledby={`${mode}DescriptionInputLabel`}
+          type="text"
+          className={`${mode}DescriptionInput`}
+          id={`${mode}DescriptionInput`}
+          name={`${mode}Description`}
+          value={text}
+          onChange={(e) => {
+            setText(e.target.value);
+          }}
+          required
+        />
       </label>
-      <input
-        aria-labelledby={`${mode}DescriptionInputLabel`}
-        type="text"
-        id={`${mode}DescriptionInput`}
-        name={`${mode}Description`}
-        value={text}
-        onChange={(e) => {
-          setText(e.target.value);
-        }}
-        required
-      />
       <label htmlFor={`${mode}PriorityInput`}>
         {mode === "edit" ? "Edit " : ""}Priority Level
+        <input
+          type="number"
+          className={`${mode}PriorityInput`}
+          id={`${mode}PriorityInput`}
+          value={priority || ""}
+          min="1"
+          max="5"
+          onChange={(e) => {
+            setPriority(Math.min(Math.max(parseInt(e.target.value), 1), 5));
+          }}
+          required
+        />
       </label>
-      <input
-        type="number"
-        id={`${mode}PriorityInput`}
-        value={priority || ""}
-        min="1"
-        max="5"
-        onChange={(e) => {
-          setPriority(Math.min(Math.max(parseInt(e.target.value), 1), 5));
-        }}
-        required
-      />
-      <button type="submit">{mode === "add" ? "+" : "Close"}</button>
+      <button type="submit">{mode === "add" ? "Add" : "Close"}</button>
     </form>
   );
 }
