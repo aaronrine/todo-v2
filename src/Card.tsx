@@ -14,6 +14,8 @@ export function Card({
   setCards,
   setIsOpen,
   setCurrentCardId,
+  marked,
+  setMarked
 }: CardProps) {
   const CARD = "card";
   const style = {
@@ -81,6 +83,7 @@ export function Card({
       style={{ ...style, opacity }}
       data-handler-id={handlerId}
       aria-label="Todo"
+      className={`Todo ${marked ? 'marked' : ''}`}
     >
       {text} {priority}
       <TodoControlPanel
@@ -88,6 +91,7 @@ export function Card({
         id={id}
         setIsOpen={setIsOpen}
         setCurrentCardId={setCurrentCardId}
+        setMarked={setMarked}
       />
     </div>
   );

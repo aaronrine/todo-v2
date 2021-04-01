@@ -68,7 +68,7 @@ describe("TodoControlPanel", () => {
     const addBtn = screen.getByRole("button");
     userEvent.type(textInput, "milk");
     userEvent.click(addBtn);
-    const delBtn = screen.getByText("-");
+    const delBtn = screen.getByText("Delete");
     userEvent.click(delBtn);
     expect(screen.queryByLabelText("Todo")).not.toBeInTheDocument();
   });
@@ -84,6 +84,29 @@ describe("TodoControlPanel", () => {
     const modal = screen.getByRole("dialog");
     expect(modal).toBeInTheDocument();
   });
+  it('Gives a todo the marked class when mark button is clicked', () => {
+    render(<App/>)
+    const textInput = screen.getByRole("textbox");
+    const addBtn = screen.getByRole("button");
+    userEvent.type(textInput, "milk");
+    userEvent.click(addBtn);
+    const markBtn = screen.getByRole('checkbox')
+    userEvent.click(markBtn)
+    const todo = screen.getByLabelText('Todo')
+    expect(todo).toHaveClass('marked')
+  })
+  it('Removes the marked class from a todo when mark button is clicked', () => {
+    render(<App/>)
+    const textInput = screen.getByRole("textbox");
+    const addBtn = screen.getByRole("button");
+    userEvent.type(textInput, "milk");
+    userEvent.click(addBtn);
+    const markBtn = screen.getByRole('checkbox')
+    userEvent.click(markBtn)
+    const todo = screen.getByText(/milk/)
+    userEvent.click(markBtn)
+    expect(todo).not.toHaveClass('marked')
+  })
 });
 describe("ModalForm", () => {
   beforeEach(() => {

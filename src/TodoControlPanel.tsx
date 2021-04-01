@@ -3,6 +3,7 @@ export function TodoControlPanel({
   id,
   setIsOpen,
   setCurrentCardId,
+  setMarked
 }: any) {
   return (
     <div>
@@ -21,6 +22,9 @@ export function TodoControlPanel({
       >
         Edit
       </button>
+      <input className="markBtn" type="checkbox" onChange={()=>{
+        setMarked((prev:any) => !prev)
+      }}/>
     </div>
   );
 }
