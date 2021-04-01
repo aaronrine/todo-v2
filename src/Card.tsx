@@ -1,9 +1,12 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import { XYCoord } from "dnd-core";
 
 import { TodoControlPanel } from "./TodoControlPanel";
 import type { CardProps, DragItem } from "./types";
+import './Card.scss'
+
+//TODO: ensure marked todo's remain marked in local storage
 
 export function Card({
   id,
@@ -17,13 +20,6 @@ export function Card({
 }: CardProps) {
   const [marked, setMarked] = useState(false);
   const CARD = "card";
-  const style = {
-    border: "1px dashed gray",
-    padding: "0.5rem 1rem",
-    marginBottom: ".5rem",
-    backgroundColor: "white",
-    cursor: "move",
-  };
   const ref = useRef<HTMLDivElement>(null);
   const [{ handlerId }, drop] = useDrop({
     accept: CARD,
@@ -79,18 +75,21 @@ export function Card({
   return (
     <div
       ref={ref}
-      style={{ ...style, opacity }}
       data-handler-id={handlerId}
       aria-label="Todo"
       className={`Todo ${marked ? 'marked' : ''}`}
     >
-      {text} {priority}
+      <div className='todoContent'>
+      <span className='todoText'>{text}</span>
+      <span className={`todoPriority priority${priority}`}> {priority}</span>
+      </div>
       <TodoControlPanel
         setCards={setCards}
         id={id}
         setIsOpen={setIsOpen}
         setCurrentCardId={setCurrentCardId}
         setMarked={setMarked}
+        marked={marked}
       />
     </div>
   );

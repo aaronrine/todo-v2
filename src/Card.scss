@@ -1,0 +1,56 @@
+.Todo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 80%;
+    padding: 0.5em 0;
+    position: relative;
+    font-size: 1.2em;
+    .todoContent {
+        min-height: 2.5em;
+        width: 100%;
+        .todoPriority {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2em;
+            right: 0;
+            top: 0.7em;
+            color: black;
+            border-radius: 50%;
+            width: 1.25em;
+            height: 1.25em;
+            text-align: center;
+            border: solid 1px black;
+        }
+        
+        .priority1 {
+            color: rgb(105, 212, 248);
+            background: black;
+        }
+        .priority2 {
+            background: rgb(24, 176, 226);
+        }
+        .priority3 {
+            background: rgb(101, 194, 224);
+        }
+        .priority4 {
+            background: rgb(153, 203, 219);
+        }
+        .priority5 {
+            background: rgb(210, 237, 246);
+        }
+        .todoText {
+            display: inline-block;
+            width: 85%;
+        }
+    }
+}
+.marked {
+    color: #555;
+    .todoText {
+        text-decoration: line-through;
+    }
+    
+}
