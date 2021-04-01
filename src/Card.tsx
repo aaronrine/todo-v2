@@ -14,9 +14,8 @@ export function Card({
   setCards,
   setIsOpen,
   setCurrentCardId,
-  marked,
-  setMarked
 }: CardProps) {
+  const [marked, setMarked] = useState(false);
   const CARD = "card";
   const style = {
     border: "1px dashed gray",
