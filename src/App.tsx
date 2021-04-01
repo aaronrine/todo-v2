@@ -6,6 +6,8 @@ import { EditModal } from "./EditModal";
 import { CardList } from "./CardList";
 import { TodoListContextProvider } from "./TodoListContext";
 
+//add touch drag and drop
+
 function App() {
   return (
     <div className="App">
