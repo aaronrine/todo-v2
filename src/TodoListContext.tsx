@@ -1,6 +1,8 @@
 import React, { useState, useCallback, useContext, useEffect } from "react";
 import { useLocalStorage } from "./hooks";
 import update from "immutability-helper";
+import type {CardProps} from './types'
+import { v4 as uuidv4 } from "uuid";
 import { Card } from "./Card";
 
 interface ContextState {
@@ -14,6 +16,7 @@ interface ContextState {
   modalIsOpen: any;
   getCardById: any;
   toggleMarkedById: any;
+  sanitizeData: any;
 }
 
 const TodoListContext = React.createContext({} as ContextState);
@@ -37,7 +40,33 @@ export function TodoListContextProvider({ children }: any) {
       })
     );
   }
-
+  function sanitizeData(text:string, priority:number) {
+    const currentCard = getCurrentCard() 
+    function handleEdit() {
+      setCards((prev: any) =>
+        prev.map((item: any) => {
+          if (item.id !== currentCard.id) {
+            return item;
+          }
+          return {
+            ...currentCard,
+            text,
+            priority,
+          };
+        })
+      );
+      setIsOpen(false);
+    }
+    function handleAdd() {
+      setCards((prev: CardProps[]) => [
+        ...prev,
+        { priority, text, marked: false, id: uuidv4() },
+      ]);
+    }
+    if (isNaN(priority) || text === "") return;
+    if (currentCard) return handleEdit();
+    return handleAdd();
+  }
   function getCardById(id: string) {
     return cards.find((card: any) => card.id === id);
   }
@@ -89,7 +118,8 @@ export function TodoListContextProvider({ children }: any) {
         renderCard,
         setIsOpen,
         modalIsOpen,
-        toggleMarkedById
+        toggleMarkedById,
+        sanitizeData
       }}
     >
       {children}
