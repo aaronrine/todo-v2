@@ -4,6 +4,7 @@ import { XYCoord } from "dnd-core";
 
 import { TodoControlPanel } from "./TodoControlPanel";
 import type { CardProps, DragItem } from "./types";
+import {useTodoListContext} from './TodoListContext'
 import './Card.scss'
 
 //TODO: ensure marked todo's remain marked in local storage
@@ -14,11 +15,8 @@ export function Card({
   marked,
   priority,
   index,
-  moveCard,
-  setCards,
-  setIsOpen,
-  setCurrentCardId,
 }: CardProps) {
+  const {moveCard} = useTodoListContext()
   const CARD = "card";
   const ref = useRef<HTMLDivElement>(null);
   const [{ handlerId }, drop] = useDrop({
@@ -36,23 +34,16 @@ export function Card({
       if (dragIndex === hoverIndex) {
         return;
       }
-      //find rect on screen
       const hoverBoundingRect = ref.current?.getBoundingClientRect();
       //Get vertical middle
       const hoverMiddleY =
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-      //Determine mouse position
       const clientOffset = monitor.getClientOffset();
       //Get pixels to the top
       const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
-      // Only perform the move when the mouse has crossed half of the items height
-      // When dragging downwards, only move when the cursor is below 50%
-      // When dragging upwards, only move when the cursor is above 50%
-      //Dragging downwards
       if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
         return;
       }
-      //Dragging upwards
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
         return;
       }

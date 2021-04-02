@@ -10,7 +10,7 @@ interface ContextState {
   setCards: any;
   getCurrentCard: any;
   setCurrentCardId: any;
-  moveCard: any;
+  moveCard: (dragIndex: number, hoverIndex: number) => void;
   renderCard: any;
   setIsOpen: any;
   modalIsOpen: any;
@@ -99,10 +99,6 @@ export function TodoListContextProvider({ children }: any) {
         marked={card.marked}
         text={card.text}
         priority={card.priority}
-        moveCard={moveCard}
-        setCards={setCards}
-        setIsOpen={setIsOpen}
-        setCurrentCardId={setCurrentCardId}
       />
     );
   };

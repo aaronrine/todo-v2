@@ -3,10 +3,6 @@ export interface CardProps {
   text: string
   priority: number
   index: number
-  moveCard: (dragIndex: number, hoverIndex: number) => void
-  setCards: any
-  setIsOpen: any
-  setCurrentCardId: any
   marked: boolean
 }
 
