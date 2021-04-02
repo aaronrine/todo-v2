@@ -7,6 +7,12 @@ import { EditModal } from "./EditModal";
 import { CardList } from "./CardList";
 import { TodoListContextProvider } from "./TodoListContext";
 
+//TODO: polish styles
+//TODO: add animations
+//TODO: fix scrolling for mobile/touch screen
+//TODO: test on firefox/safari
+//TODO: complete drag and drop tests
+//TODO: create test for localstorage hook
 
 function App() {
   return (
