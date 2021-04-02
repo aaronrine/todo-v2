@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import { XYCoord } from "dnd-core";
 
@@ -11,6 +11,7 @@ import './Card.scss'
 export function Card({
   id,
   text,
+  marked,
   priority,
   index,
   moveCard,
@@ -18,7 +19,6 @@ export function Card({
   setIsOpen,
   setCurrentCardId,
 }: CardProps) {
-  const [marked, setMarked] = useState(false);
   const CARD = "card";
   const ref = useRef<HTMLDivElement>(null);
   const [{ handlerId }, drop] = useDrop({
@@ -95,7 +95,6 @@ export function Card({
           id={id}
           setIsOpen={setIsOpen}
           setCurrentCardId={setCurrentCardId}
-          setMarked={setMarked}
           marked={marked}
         />
       </div>

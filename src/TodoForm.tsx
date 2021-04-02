@@ -30,7 +30,7 @@ export function TodoForm() {
     function handleAdd() {
       setCards((prev: CardProps[]) => [
         ...prev,
-        { priority, text, id: uuidv4() },
+        { priority, text, marked:false, id: uuidv4() },
       ]);
     }
     if (isNaN(priority) || text === "") return;

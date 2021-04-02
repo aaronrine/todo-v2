@@ -7,6 +7,7 @@ export interface CardProps {
   setCards: any
   setIsOpen: any
   setCurrentCardId: any
+  marked: boolean
 }
 
 export interface DragItem {

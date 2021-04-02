@@ -13,6 +13,7 @@ interface ContextState {
   setIsOpen: any;
   modalIsOpen: any;
   getCardById: any;
+  toggleMarkedById: any;
 }
 
 const TodoListContext = React.createContext({} as ContextState);
@@ -22,17 +23,26 @@ export function TodoListContextProvider({ children }: any) {
   const [currentCardId, setCurrentCardId] = useState("");
   const [modalIsOpen, setIsOpen] = useState(false);
 
-  useEffect(()=>{
-    if(modalIsOpen===false){
-      setCurrentCardId('')
+  useEffect(() => {
+    if (modalIsOpen === false) {
+      setCurrentCardId("");
     }
-  }, [modalIsOpen])
+  }, [modalIsOpen]);
 
-  function getCardById(id:string){
+  function toggleMarkedById(id: string, marked: boolean) {
+    setCards((prev: any) =>
+      prev.map((item: any) => {
+        if (item.id !== id) return item;
+        return { ...item, marked };
+      })
+    );
+  }
+
+  function getCardById(id: string) {
     return cards.find((card: any) => card.id === id);
   }
   function getCurrentCard() {
-    return getCardById(currentCardId)
+    return getCardById(currentCardId);
   }
   const moveCard = useCallback(
     (dragIndex: number, hoverIndex: number) => {
@@ -49,7 +59,7 @@ export function TodoListContextProvider({ children }: any) {
     [cards, setCards]
   );
   const renderCard = (
-    card: { id: number; text: string; priority: number },
+    card: { id: number; text: string; priority: number; marked: boolean },
     index: number
   ) => {
     return (
@@ -57,6 +67,7 @@ export function TodoListContextProvider({ children }: any) {
         key={card.id}
         index={index}
         id={card.id}
+        marked={card.marked}
         text={card.text}
         priority={card.priority}
         moveCard={moveCard}
@@ -64,7 +75,6 @@ export function TodoListContextProvider({ children }: any) {
         setIsOpen={setIsOpen}
         setCurrentCardId={setCurrentCardId}
       />
-      
     );
   };
   return (
@@ -79,6 +89,7 @@ export function TodoListContextProvider({ children }: any) {
         renderCard,
         setIsOpen,
         modalIsOpen,
+        toggleMarkedById
       }}
     >
       {children}

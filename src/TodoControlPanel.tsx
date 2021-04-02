@@ -1,12 +1,13 @@
 import "./TodoControlPanel.scss";
+import {useTodoListContext} from './TodoListContext'
 export function TodoControlPanel({
   setCards,
   id,
   setIsOpen,
   setCurrentCardId,
-  setMarked,
   marked
 }: any) {
+  const {toggleMarkedById} = useTodoListContext()
   return (
     <div className="TodoControlPanel">
       <button
@@ -29,7 +30,7 @@ export function TodoControlPanel({
       <div
         className={`checkboxContainer ${marked? 'marked' : ''}`}
         onClick={() => {
-          setMarked((prev: any) => !prev);
+          toggleMarkedById(id, !marked)
         }}
       >
         <input className="markBtn" type="checkbox" />
