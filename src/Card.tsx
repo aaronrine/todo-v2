@@ -62,7 +62,7 @@ export function Card({
     
     },
   });
-  const [{ isDragging, item }, drag] = useDrag({
+  const [{ isDragging }, drag] = useDrag({
     type: CARD,
     item: () => {
       return { id, index };
