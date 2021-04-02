@@ -3,7 +3,7 @@ import { Preview } from "react-dnd-multi-backend";
 import "./CardList.scss";
 export function CardList() {
   const { cards, renderCard, getCardById } = useTodoListContext();
-  function generatePreview({ itemType, item, style }: any) {
+  function generatePreview({ item, style }: any) {
     return (
       <div style={{ ...style, background: "white" }}>
         {renderCard(getCardById(item.id))}
