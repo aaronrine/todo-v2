@@ -91,10 +91,7 @@ export function Card({
           </span>
         </div>
         <TodoControlPanel
-          setCards={setCards}
           id={id}
-          setIsOpen={setIsOpen}
-          setCurrentCardId={setCurrentCardId}
           marked={marked}
         />
       </div>

@@ -1,13 +1,10 @@
 import "./TodoControlPanel.scss";
 import {useTodoListContext} from './TodoListContext'
 export function TodoControlPanel({
-  setCards,
   id,
-  setIsOpen,
-  setCurrentCardId,
   marked
 }: any) {
-  const {toggleMarkedById} = useTodoListContext()
+  const {toggleMarkedById, setCards, setCurrentCardId, setIsOpen} = useTodoListContext()
   return (
     <div className="TodoControlPanel">
       <button
