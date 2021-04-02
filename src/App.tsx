@@ -1,17 +1,17 @@
 import { DndProvider } from "react-dnd";
-import { HTML5Backend } from "react-dnd-html5-backend";
+import MultiBackend from 'react-dnd-multi-backend'
+import HTML5toTouch from 'react-dnd-multi-backend/dist/esm/HTML5toTouch'
 import "./App.scss";
 import { TodoAddForm } from "./TodoAddForm";
 import { EditModal } from "./EditModal";
 import { CardList } from "./CardList";
 import { TodoListContextProvider } from "./TodoListContext";
 
-//add touch drag and drop
 
 function App() {
   return (
     <div className="App">
-      <DndProvider backend={HTML5Backend}>
+      <DndProvider backend={MultiBackend} options={HTML5toTouch}>
         <TodoListContextProvider>
           <TodoAddForm />
           <EditModal />

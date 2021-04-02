@@ -12,6 +12,7 @@ interface ContextState {
   renderCard: any;
   setIsOpen: any;
   modalIsOpen: any;
+  getCardById: any;
 }
 
 const TodoListContext = React.createContext({} as ContextState);
@@ -27,8 +28,11 @@ export function TodoListContextProvider({ children }: any) {
     }
   }, [modalIsOpen])
 
+  function getCardById(id:string){
+    return cards.find((card: any) => card.id === id);
+  }
   function getCurrentCard() {
-    return cards.find((card: any) => card.id === currentCardId);
+    return getCardById(currentCardId)
   }
   const moveCard = useCallback(
     (dragIndex: number, hoverIndex: number) => {
@@ -60,6 +64,7 @@ export function TodoListContextProvider({ children }: any) {
         setIsOpen={setIsOpen}
         setCurrentCardId={setCurrentCardId}
       />
+      
     );
   };
   return (
@@ -68,6 +73,7 @@ export function TodoListContextProvider({ children }: any) {
         cards,
         setCards,
         getCurrentCard,
+        getCardById,
         setCurrentCardId,
         moveCard,
         renderCard,

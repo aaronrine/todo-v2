@@ -9,6 +9,7 @@
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
     "@types/react": "^17.0.0",
+    "@types/react-dnd-multi-backend": "^6.0.0",
     "@types/react-dom": "^17.0.0",
     "@types/uuid": "^8.3.0",
     "immutability-helper": "^3.1.1",
@@ -16,6 +17,8 @@
     "react": "^17.0.1",
     "react-dnd": "^14.0.2",
     "react-dnd-html5-backend": "^14.0.0",
+    "react-dnd-multi-backend": "^6.0.2",
+    "react-dnd-preview": "^6.0.2",
     "react-dnd-test-backend": "^14.0.0",
     "react-dnd-test-utils": "^14.0.0",
     "react-dnd-touch-backend": "^14.0.0",
@@ -56,6 +59,9 @@
     "jest-localstorage-mock": "^2.4.8"
   },
   "jest": {
-    "resetMocks": false
+    "resetMocks": false,
+    "transformIgnorePatterns": [
+      "node_modules/(?!@codemirror)/"
+    ]
   }
 }

@@ -59,38 +59,47 @@ export function Card({
       moveCard(dragIndex, hoverIndex);
       //this is a necassary mutation to prevent index searches
       item.index = hoverIndex;
+    
     },
   });
-  const [{ isDragging }, drag] = useDrag({
+  const [{ isDragging, item }, drag] = useDrag({
     type: CARD,
     item: () => {
       return { id, index };
     },
     collect: (monitor: any) => ({
       isDragging: monitor.isDragging(),
+      item: monitor.getItem()
     }),
   });
   const opacity = isDragging ? 0 : 1;
   drag(drop(ref));
   return (
-    <div
-      ref={ref}
-      data-handler-id={handlerId}
-      aria-label="Todo"
-      className={`Todo ${marked ? 'marked' : ''}`}
-    >
-      <div className='todoContent'>
-      <span className='todoText'>{text}</span>
-      <span className={`todoPriority priority${priority}`}> {priority}</span>
+    <>
+      <div
+        ref={ref}
+        data-handler-id={handlerId}
+        aria-label="Todo"
+        className={`Todo ${marked ? "marked" : ""}`}
+        style={{ opacity: opacity }}
+      >
+        <div className="todoContent">
+          <span className="todoText">{text}</span>
+          <span className={`todoPriority priority${priority}`}>
+            {" "}
+            {priority}
+          </span>
+        </div>
+        <TodoControlPanel
+          setCards={setCards}
+          id={id}
+          setIsOpen={setIsOpen}
+          setCurrentCardId={setCurrentCardId}
+          setMarked={setMarked}
+          marked={marked}
+        />
       </div>
-      <TodoControlPanel
-        setCards={setCards}
-        id={id}
-        setIsOpen={setIsOpen}
-        setCurrentCardId={setCurrentCardId}
-        setMarked={setMarked}
-        marked={marked}
-      />
-    </div>
+      
+    </>
   );
 }
