@@ -7,7 +7,6 @@ import type { CardProps, DragItem } from "./types";
 import {useTodoListContext} from './TodoListContext'
 import './Card.scss'
 
-//TODO: ensure marked todo's remain marked in local storage
 
 export function Card({
   id,
