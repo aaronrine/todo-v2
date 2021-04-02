@@ -1,3 +1,4 @@
+@import './colors';
 form {
     display: flex;
     flex-direction: column;
@@ -15,12 +16,12 @@ form {
             border-width: 0 0 2px;
             border-style: solid;
             border-image-slice: 1;
-            border-image-source: linear-gradient(to left, white, black, white); 
+            border-image-source: linear-gradient(to left, $white, $black, $white); 
             text-align: center;
         }
         input:focus {
             outline: none;
-            border-image-source: linear-gradient(to left, white, rgb(83, 189, 224), white);
+            border-image-source: linear-gradient(to left, $white, $skyBlue, $white);
         }
         .addPriorityInput {
             width: 50%;
@@ -33,13 +34,13 @@ form {
         margin-left: 1.5em;
         border: none;
         background:black;
-        color: white;
+        color: $white;
         border-radius: 0.5em;
         padding: 0.25em 0.5em;
         font-size: 0.9em;
     }
     button:focus {
         outline: none;
-        box-shadow: 0 0 0 3px rgb(83, 189, 224);
+        box-shadow: 0 0 0 3px $skyBlue;
     }
 }

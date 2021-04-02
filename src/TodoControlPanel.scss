@@ -1,23 +1,24 @@
+@import './colors';
 .TodoControlPanel {
   display: flex;
   justify-content: space-between;
   button {
     border: none;
     border-radius: 0.5em;
-    background: black;
+    background: $black;
     padding: 0.25em 0.5em;
-    color: white;
+    color: $white;
     font-size: 0.85em;
   }
   button:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgb(83, 189, 224)
+    box-shadow: 0 0 0 3px $skyBlue
   }
   button + button {
     margin-left: 0.5em;
   }
   .deleteBtn {
-    background: red;
+    background: $red;
   }
   .checkboxContainer {
     position: relative;
@@ -37,10 +38,10 @@
       height: 1.5em;
       width: 1.5em;
       border-radius: 0.5em;
-      background: black;
+      background: $black;
     }
     .markBtn:focus + .checkmark {
-      box-shadow: 0 0 0 3px rgb(83, 189, 224);
+      box-shadow: 0 0 0 3px $skyBlue;
     }
     .checkmark:after {
       content: "";
@@ -56,7 +57,7 @@
     top: 0.25em;
     width: 0.3125em;
     height: 0.625em;
-    border: solid rgb(83, 189, 224);
+    border: solid $skyBlue;
     border-width: 0 0.25em 0.25em 0;
     transform: rotate(45deg);
   }
