@@ -9,6 +9,7 @@ form {
     label {
         width: 100%;
         text-align: center;
+        cursor: pointer;
         input {
             width: 100%;
             border: none;
@@ -38,6 +39,7 @@ form {
         border-radius: 0.5em;
         padding: 0.25em 0.5em;
         font-size: 0.9em;
+        cursor: pointer;
     }
     button:focus {
         outline: none;
