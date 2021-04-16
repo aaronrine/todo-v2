@@ -10,9 +10,9 @@ This is a standard todo app with a few extra bits and bobs, most notably:
 - Test suite to help future developers
 
 ### Tech Stack
-- Fast API
+- FastAPI
 - Jest
-- MySQL
+- Postgres SQL
 - React
 - React Testing Library
 - Sass

@@ -1,5 +1,5 @@
-export interface CardProps {
-  id: any
+export type Todo = {
+  id?: string | number
   text: string
   priority: number
   index: number

@@ -1,9 +1,8 @@
 import { useRef } from "react";
 import { useDrag, useDrop, DropTargetMonitor } from "react-dnd";
 import { XYCoord } from "dnd-core";
-
 import { TodoControlPanel } from "./TodoControlPanel";
-import type { CardProps, DragItem } from "./types";
+import type { Todo, DragItem } from "./types";
 import {useTodoListContext} from './TodoListContext'
 import './Card.scss'
 
@@ -14,14 +13,17 @@ export function Card({
   marked,
   priority,
   index,
-}: CardProps) {
-  const {moveCard} = useTodoListContext()
+}: Todo) {
+  const { moveCard, sortCards} = useTodoListContext();
   const CARD = "card";
   const ref = useRef<HTMLDivElement>(null);
-  const [{ handlerId }, drop] = useDrop({
+  const [{ handlerId, todoDidDrop }, drop] = useDrop({
     accept: CARD,
     collect(monitor) {
-      return { handlerId: monitor.getHandlerId() };
+      return {
+        handlerId: monitor.getHandlerId(),
+        todoDidDrop: monitor.didDrop()
+      };
     },
     hover(item: DragItem, monitor: DropTargetMonitor) {
       if (!ref.current) {
@@ -49,9 +51,9 @@ export function Card({
       moveCard(dragIndex, hoverIndex);
       //this is a necassary mutation to prevent index searches
       item.index = hoverIndex;
-    
     },
   });
+  
   const [{ isDragging }, drag] = useDrag({
     type: CARD,
     item: () => {
@@ -63,6 +65,10 @@ export function Card({
     }),
   });
   const opacity = isDragging ? 0 : 1;
+  
+  if (todoDidDrop) {
+    sortCards()
+  }
   drag(drop(ref));
   return (
     <>

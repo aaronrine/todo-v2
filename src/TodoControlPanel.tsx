@@ -4,13 +4,13 @@ export function TodoControlPanel({
   id,
   marked
 }: any) {
-  const {toggleMarkedById, setCards, setCurrentCardId, setIsOpen} = useTodoListContext()
+  const {toggleMarkedById, setCurrentCardId, setIsOpen, deleteCard} = useTodoListContext()
   return (
     <div className="TodoControlPanel">
       <button
         className="deleteBtn"
         onClick={() => {
-          setCards((prev: any) => prev.filter((todo: any) => todo.id !== id));
+          deleteCard(id);
         }}
       >
         Delete
